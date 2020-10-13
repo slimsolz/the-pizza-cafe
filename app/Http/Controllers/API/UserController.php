@@ -5,7 +5,9 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\ProfileRequest;
 use App\Http\Resources\AuthResource;
+use App\Http\Resources\ProfileResponse;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -48,6 +50,30 @@ class UserController extends Controller
             'message' => 'login successful',
             'token' => $this->jwt($foundUser),
             'data' => new AuthResource($foundUser),
+        ], Response::HTTP_OK);
+    }
+
+    public function updateProfile(Request $request, ProfileRequest $profileRequest)
+    {
+        $user = User::find($request->auth->id);
+        $user->address = $profileRequest->address;
+        $user->phone_number = $profileRequest->phone_number;
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'profile updated successful',
+            'data' => new ProfileResponse($user),
+        ], Response::HTTP_OK);
+    }
+
+    public function getProfile(Request $request)
+    {
+        $user = User::find($request->auth->id);
+        return response()->json([
+            'success' => true,
+            'message' => 'success',
+            'data' => new ProfileResponse($user),
         ], Response::HTTP_OK);
     }
 
