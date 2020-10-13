@@ -2,8 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Resources\AuthResource;
 use App\Models\User;
 use Closure;
+use Exception;
 use Firebase\JWT\ExpiredException;
 use Firebase\JWT\JWT;
 use Firebase\JWT\SignatureInvalidException;
@@ -23,10 +25,12 @@ class JwtMiddleware
     {
         if ($request->get('token')) {
             $token = $request->get('token');
-        }
-        else if ($request->header('Authorization')){
+        } else if ($request->header('Authorization')){
             $token = substr($request->header('Authorization'), 7);
+        } else {
+            $token = '';
         }
+
         if (!$token) {
             return response()->json([
                 'message' => 'Token not provided'
@@ -45,7 +49,7 @@ class JwtMiddleware
             ], Response::HTTP_UNAUTHORIZED);
         }
 
-        $user = User::find($decoded->sub);
+        $user = new AuthResource(User::find($decoded->sub));
         $request->auth = $user;
         return $next($request);
     }

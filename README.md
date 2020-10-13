@@ -2,6 +2,8 @@
 
 - Register: `POST api/v1/auth/register`
 - Login: `POST api/v1/auth/login`
+- Update Profile: `PATCH api/v1/profile`
+- Get Profile: `GET api/v1/profile`
 
 ## Author
 

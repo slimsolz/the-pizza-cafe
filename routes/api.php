@@ -20,7 +20,13 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::group(['prefix' => 'v1'], function () {
+    // Auth
     Route::post('auth/register', [UserController::class, 'register']);
     Route::post('auth/login', [UserController::class, 'login']);
-});
 
+    Route::middleware(['jwt.auth'])->group(function () {
+        // Profile
+        Route::patch('profile', [UserController::class, 'updateProfile']);
+        Route::get('profile', [UserController::class, 'getProfile']);
+    });
+});
