@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
 use App\Http\Requests\LoginRequest;
+use App\Http\Resources\AuthResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -25,7 +26,7 @@ class UserController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'registration successful',
-            'data' => $user,
+            'data' => new AuthResource($user),
             'token' => $this->jwt($user),
         ], Response::HTTP_CREATED);
     }
@@ -46,10 +47,7 @@ class UserController extends Controller
             'success' => true,
             'message' => 'login successful',
             'token' => $this->jwt($foundUser),
-            'user' => [
-                'id' => $foundUser->id,
-                'email' => $foundUser->email
-            ]
+            'data' => new AuthResource($foundUser),
         ], Response::HTTP_OK);
     }
 
