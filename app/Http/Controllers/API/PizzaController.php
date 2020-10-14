@@ -39,11 +39,6 @@ class PizzaController extends Controller
 
     public function addPizza(PizzaRequest $pizzaRequest)
     {
-        $this->validate($pizzaRequest, [
-            'image' => 'required',
-            'image.*' => 'mimes:jpeg,bmp,jpg,png|between:1,6000'
-        ]);
-
         $pizza = new Pizza();
         $pizza->name = $pizzaRequest->name;
         $pizza->description = $pizzaRequest->description;
@@ -88,9 +83,10 @@ class PizzaController extends Controller
         }
         $this->deleteCloudinaryImages($pizza->photo->public_id);
         $pizza->delete();
-        return response()->json(['id' => $pizza->photo->public_id,
-            'data' => $pizza
-    ], Response::HTTP_OK);
+        return response()->json([
+            'success' => true,
+            'message' => 'deleted successfully'
+        ], Response::HTTP_OK);
     }
 
     private function saveToCloudinary($name)

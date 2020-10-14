@@ -27,7 +27,9 @@ class PizzaRequest extends FormRequest
             'name' => 'required|string|unique:pizzas',
             'description' => 'required|string',
             'size' => 'required|string',
-            'price' => 'required|numeric'
+            'price' => 'required|numeric',
+            'image' => 'required',
+            'image.*' => 'mimes:jpeg,bmp,jpg,png|between:1,6000'
         ];
     }
 }
