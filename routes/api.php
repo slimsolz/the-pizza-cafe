@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\PizzaController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,9 +25,17 @@ Route::group(['prefix' => 'v1'], function () {
     Route::post('auth/register', [UserController::class, 'register']);
     Route::post('auth/login', [UserController::class, 'login']);
 
+    //Pizza
+    Route::get('pizza', [PizzaController::class, 'getMenu']);
+    Route::get('pizza/{id}',  [PizzaController::class, 'getPizza']);
+
     Route::middleware(['jwt.auth'])->group(function () {
         // Profile
         Route::patch('profile', [UserController::class, 'updateProfile']);
         Route::get('profile', [UserController::class, 'getProfile']);
+
+        //pizza
+        Route::post('pizza', [PizzaController::class, 'addPizza']);
+        Route::delete('pizza/{id}',  [PizzaController::class, 'deletePizza']);
     });
 });
