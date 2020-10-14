@@ -26,14 +26,16 @@ Route::group(['prefix' => 'v1'], function () {
     Route::post('auth/login', [UserController::class, 'login']);
 
     //Pizza
-    Route::post('pizza', [PizzaController::class, 'addPizza']);
     Route::get('pizza', [PizzaController::class, 'getMenu']);
     Route::get('pizza/{id}',  [PizzaController::class, 'getPizza']);
-    Route::delete('pizza/{id}',  [PizzaController::class, 'deletePizza']);
 
     Route::middleware(['jwt.auth'])->group(function () {
         // Profile
         Route::patch('profile', [UserController::class, 'updateProfile']);
         Route::get('profile', [UserController::class, 'getProfile']);
+
+        //pizza
+        Route::post('pizza', [PizzaController::class, 'addPizza']);
+        Route::delete('pizza/{id}',  [PizzaController::class, 'deletePizza']);
     });
 });

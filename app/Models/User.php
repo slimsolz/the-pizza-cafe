@@ -22,7 +22,8 @@ class User extends Authenticatable
         'email',
         'password',
         'address',
-        'phone_number'
+        'phone_number',
+        'isAdmin',
     ];
 
     /**
@@ -39,5 +40,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'isAdmin' => 'boolean'
+    ];
 }

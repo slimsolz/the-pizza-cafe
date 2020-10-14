@@ -23,6 +23,7 @@ class UserController extends Controller
         $user->last_name = $authRequest->first_name;
         $user->email = $authRequest->email;
         $user->password = bcrypt($authRequest->password);
+        $user->isAdmin = false;
         $user->save();
 
         return response()->json([
@@ -69,12 +70,7 @@ class UserController extends Controller
 
     public function getProfile(Request $request)
     {
-        $user = User::find($request->auth->id);
-        return response()->json([
-            'success' => true,
-            'message' => 'success',
-            'data' => new ProfileResponse($user),
-        ], Response::HTTP_OK);
+        return new ProfileResponse($request->auth);
     }
 
     /**

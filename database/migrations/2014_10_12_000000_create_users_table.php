@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('phone_number')->nullable();
             $table->text('address')->nullable();
+            $table->boolean('isAdmin')->default(false);
             $table->timestamps();
         });
     }

@@ -122,7 +122,6 @@ class UserControllerTest extends TestCase
             ->json('GET', '/api/v1/profile')
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure([
-                'message',
                 'data' => [
                     'id',
                     'first_name',
