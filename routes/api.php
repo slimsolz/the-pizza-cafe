@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\PizzaController;
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\CartController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,10 +17,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-    // return $request->user();
-// });
-
 Route::group(['prefix' => 'v1'], function () {
     // Auth
     Route::post('auth/register', [UserController::class, 'register']);
@@ -28,6 +25,15 @@ Route::group(['prefix' => 'v1'], function () {
     //Pizza
     Route::get('pizza', [PizzaController::class, 'getMenu']);
     Route::get('pizza/{id}',  [PizzaController::class, 'getPizza']);
+
+    // Cart
+    Route::post('cart', [CartController::class, 'createCart']);
+    Route::post('cart/{pizza_id}', [CartController::class, 'addToCart']);
+    Route::patch('cart/quantity/{cart_id}/{item_id}', [CartController::class, 'updateItemInCart']);
+    Route::delete('cart/{cart_id}/{item_id}', [CartController::class, 'removeItemFromCart']);
+    Route::delete('cart/{cart_id}', [CartController::class, 'emptyCart']);
+    Route::get('cart/total/{cart_id}', [CartController::class, 'getCartTotalPrice']);
+    Route::get('cart/{cart_id}', [CartController::class, 'viewCart']);
 
     Route::middleware(['jwt.auth'])->group(function () {
         // Profile

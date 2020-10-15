@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Cart;
+use App\Models\Photo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -35,5 +37,10 @@ class Pizza extends Model
 
     public function photo() {
         return $this->hasOne(Photo::class, 'pizza_id', 'id');
+    }
+
+    public function cart()
+    {
+        return $this->belongsTo(Cart::class);
     }
 }

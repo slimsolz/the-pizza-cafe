@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Pizza;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -41,4 +42,9 @@ class Cart extends Model
         'quantity' => 'integer',
         'pizza_id' => 'integer'
     ];
+
+    public function pizzas()
+    {
+        return $this->hasMany(Pizza::class);
+    }
 }
