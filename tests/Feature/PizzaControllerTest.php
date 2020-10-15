@@ -18,14 +18,12 @@ class PizzaControllerTest extends TestCase
     public function testItGetMenu()
     {
         Pizza::factory()->hasPhoto()->create();
-        $this->json('GET', 'api/v1/pizza')
-            ->assertStatus(Response::HTTP_OK);
+        $this->get('api/v1/pizza')->assertStatus(Response::HTTP_OK);
     }
 
     public function testItIdentifiesAnEmptyMenu()
     {
-        $this->json('GET', 'api/v1/pizza')
-            ->assertStatus(Response::HTTP_NO_CONTENT);
+        $this->get('api/v1/pizza')->assertStatus(Response::HTTP_NO_CONTENT);
     }
 
     public function testItAGetSinglePizza()
@@ -37,8 +35,7 @@ class PizzaControllerTest extends TestCase
 
     public function testItFailsToGetAGetSinglePizza()
     {
-        $pizza = Pizza::factory()->hasPhoto()->create();
-        $res = $this->json('GET', 'api/v1/pizza/5')
+        $this->get('api/v1/pizza/5')
             ->assertStatus(Response::HTTP_NOT_FOUND)
             ->assertJson([
                 "message" => "Pizza not found"

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Cart;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class CartFactory extends Factory
 {
@@ -22,7 +23,15 @@ class CartFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'cart_id' => $this->generateCartId(),
+            'pizza_id' => 1,
+            'size' => 'M',
+            'quantity' => 2,
         ];
+    }
+
+    private function generateCartId()
+    {
+        return Str::random(20);
     }
 }

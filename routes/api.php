@@ -27,9 +27,9 @@ Route::group(['prefix' => 'v1'], function () {
     Route::get('pizza/{id}',  [PizzaController::class, 'getPizza']);
 
     // Cart
-    Route::post('cart', [CartController::class, 'createCart']);
+    Route::get('cart/uniqueId', [CartController::class, 'createCart']);
     Route::post('cart/{pizza_id}', [CartController::class, 'addToCart']);
-    Route::patch('cart/quantity/{cart_id}/{item_id}', [CartController::class, 'updateItemInCart']);
+    Route::patch('cart/{cart_id}/{item_id}', [CartController::class, 'updateItemInCart']);
     Route::delete('cart/{cart_id}/{item_id}', [CartController::class, 'removeItemFromCart']);
     Route::delete('cart/{cart_id}', [CartController::class, 'emptyCart']);
     Route::get('cart/total/{cart_id}', [CartController::class, 'getCartTotalPrice']);
