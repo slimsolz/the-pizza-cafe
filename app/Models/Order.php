@@ -2,11 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\Pizza;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cart extends Model
+class Order extends Model
 {
     use HasFactory;
 
@@ -17,10 +16,11 @@ class Cart extends Model
      */
     protected $fillable = [
         'cart_id',
-        'pizza_id',
-        'quantity',
-        'size',
-        'price'
+        'user_id',
+        'delivery_fee',
+        'delivery_address',
+        'sub_total',
+        'currency'
     ];
 
     /**
@@ -38,18 +38,12 @@ class Cart extends Model
      * @var array
      */
     protected $casts = [
-        'price' => 'float',
-        'quantity' => 'integer',
-        'pizza_id' => 'integer'
+        'sub_total' => 'float',
+        'delivery_fee' => 'float',
     ];
 
-    public function pizzas()
+    public function cart()
     {
-        return $this->hasMany(Pizza::class, 'pizza_id');
-    }
-
-    public function order()
-    {
-        return $this->belongsTo(Order::class, 'cart_id');
+        return $this->hasOne(Cart::class);
     }
 }
