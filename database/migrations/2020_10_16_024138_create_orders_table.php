@@ -21,11 +21,8 @@ class CreateOrdersTable extends Migration
             $table->double('delivery_fee', 8, 2)->default(1.99);
             $table->double('sub_total', 8, 2)->default(0.00);
             $table->string('currency');
+            $table->integer('zip_code');
             $table->timestamps();
-
-            $table->foreign('cart_id')
-                ->references('cart_id')
-                ->on('carts');
         });
     }
 

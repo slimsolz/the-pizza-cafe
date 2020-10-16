@@ -20,7 +20,8 @@ class Order extends Model
         'delivery_fee',
         'delivery_address',
         'sub_total',
-        'currency'
+        'currency',
+        'zip_code'
     ];
 
     /**
@@ -40,6 +41,7 @@ class Order extends Model
     protected $casts = [
         'sub_total' => 'float',
         'delivery_fee' => 'float',
+        'zip_code' => 'integer'
     ];
 
     public function cart()

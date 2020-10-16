@@ -14,6 +14,7 @@ class CreateCartsTable extends Migration
     public function up()
     {
         Schema::create('carts', function (Blueprint $table) {
+            $table->id();
             $table->string('cart_id');
             $table->foreignId('pizza_id');
             $table->integer('quantity')->default(1);
@@ -24,8 +25,6 @@ class CreateCartsTable extends Migration
             $table->foreign('pizza_id')
                 ->references('id')
                 ->on('pizzas');
-
-            $table->primary('cart_id');
         });
     }
 

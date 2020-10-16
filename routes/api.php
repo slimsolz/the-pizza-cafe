@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\PizzaController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\CartController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,10 @@ Route::group(['prefix' => 'v1'], function () {
     Route::delete('cart/{cart_id}', [CartController::class, 'emptyCart']);
     Route::get('cart/total/{cart_id}', [CartController::class, 'getCartTotalPrice']);
     Route::get('cart/{cart_id}', [CartController::class, 'viewCart']);
+
+    // Order
+    Route::post('order', [OrderController::class, 'createOrder']);
+    Route::get('order/{id}', [OrderController::class, 'getOrderSummary']);
 
     Route::middleware(['jwt.auth'])->group(function () {
         // Profile
