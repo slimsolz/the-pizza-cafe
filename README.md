@@ -1,25 +1,31 @@
+# The Pizza Cafe 🍕
+
 ## Features
 
--   Register: `POST api/v1/auth/register`
--   Login: `POST api/v1/auth/login`
--   Update Profile: `PATCH api/v1/profile`
--   Get Profile: `GET api/v1/profile`
--   Add pizza: `POST api/v1/pizza`
--   Get menu/Get all: `GET api/v1/pizza`
--   Get single Pizza: `GET api/v1/pizza/{pizzaId}`
--   Delete pizza: `POST api/v1/pizza/{pizzaId}`
--   Update pizza: `POST api/v1/pizza/{pizzaId}`
--   Create unique cart id: `POST api/v1/cart/uniqueId`
--   Add pizza to cart: `POST api/v1/cart/{pizza_id}`
--   Update item in cart: `PATCH api/v1/cart/{cart_id}/{pizza_id}`
--   Remove item from cart: `DELETE api/v1/cart/{cart_id}/{pizza_id}`
--   Empty cart: `DELETE api/v1/cart/{cart_id}`
--   Get total amount in cart: `GET api/v1/cart/total/{cart_id}`
--   View cart: `GET api/v1/cart/{cart_id}`
+- Register: `POST api/v1/auth/register`
+- Login: `POST api/v1/auth/login`
+- Update Profile: `PATCH api/v1/profile`
+- Get Profile: `GET api/v1/profile`
+- Add pizza: `POST api/v1/pizza`
+- Get menu/Get all: `GET api/v1/pizza`
+- Get single Pizza: `GET api/v1/pizza/{pizzaId}`
+- Delete pizza: `POST api/v1/pizza/{pizzaId}`
+- Update pizza: `POST api/v1/pizza/{pizzaId}`
+- Create unique cart id: `POST api/v1/cart/uniqueId`
+- Add pizza to cart: `POST api/v1/cart/{pizza_id}`
+- Update item in cart: `PATCH api/v1/cart/{cart_id}/{pizza_id}`
+- Remove item from cart: `DELETE api/v1/cart/{cart_id}/{pizza_id}`
+- Empty cart: `DELETE api/v1/cart/{cart_id}`
+- Get total amount in cart: `GET api/v1/cart/total/{cart_id}`
+- View cart: `GET api/v1/cart/{cart_id}`
+- Create order: `POST api/v1/order`
+- View order summary: `POST api/v1/order/{id}`
+- Cancel an order: `POST api/v1/order/{id}`
+- View order history: `POST api/v1/order/history`
 
 ## Author
 
--   Odumah Solomon
+- Odumah Solomon
 
 ## License
 

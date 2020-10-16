@@ -45,7 +45,7 @@ class Cart extends Model
 
     public function pizzas()
     {
-        return $this->hasMany(Pizza::class, 'pizza_id');
+        return $this->hasMany(Pizza::class, 'pizza_id', 'id');
     }
 
     public function order()
