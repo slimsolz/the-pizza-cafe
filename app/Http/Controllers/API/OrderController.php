@@ -18,15 +18,16 @@ class OrderController extends Controller
     public function createOrder(OrderRequest $orderRequest)
     {
         $amountInCart = Cart::where('cart_id', $orderRequest->cart_id)->sum('price');
+        $currency = strtolower($orderRequest->currency);
 
         $order = new Order();
         $order->cart_id = $orderRequest->cart_id;
         $order->user_id = $orderRequest->user_id ?? null;
-        $order->currency = $orderRequest->currency;
+        $order->currency = $currency;
         $order->zip_code = $orderRequest->zip_code;
         $order->delivery_fee = self::DELIVERY_FEE;
         $order->delivery_address = $orderRequest->delivery_address;
-        $order->sub_total = $this->getTotalCartAmount($amountInCart, $orderRequest->currency);
+        $order->sub_total = $this->getTotalCartAmount($amountInCart, $currency);
         $order->save();
 
         return response()->json([
