@@ -16,15 +16,11 @@ class CreateCartsTable extends Migration
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
             $table->string('cart_id');
-            $table->foreignId('pizza_id');
+            $table->integer('pizza_id');
             $table->integer('quantity')->default(1);
             $table->enum('size', ['S', 'M', 'L'])->default('S');
             $table->double('price', 8, 2)->default(0.00);
             $table->timestamps();
-
-            $table->foreign('pizza_id')
-                ->references('id')
-                ->on('pizzas');
         });
     }
 
