@@ -20,10 +20,12 @@ class UserController extends Controller
     {
         $user = new User();
         $user->first_name = $authRequest->first_name;
-        $user->last_name = $authRequest->first_name;
+        $user->last_name = $authRequest->last_name;
         $user->email = $authRequest->email;
         $user->password = bcrypt($authRequest->password);
         $user->isAdmin = false;
+        $user->address = $authRequest->address;
+        $user->phone_number = $authRequest->phone_number;
         $user->save();
 
         return response()->json([

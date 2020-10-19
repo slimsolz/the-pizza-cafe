@@ -3,7 +3,7 @@
 use App\Http\Controllers\API\PizzaController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\CartController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\API\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +18,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['prefix' => 'v1'], function () {
+    Route::middleware(['jwt.auth'])->group(function () {
+        // Profile
+        Route::patch('profile', [UserController::class, 'updateProfile']);
+        Route::get('profile', [UserController::class, 'getProfile']);
+
+        // pizza
+        Route::post('pizza', [PizzaController::class, 'addPizza']);
+        Route::delete('pizza/{id}',  [PizzaController::class, 'deletePizza']);
+
+        // order
+        Route::get('order/history', [OrderController::class, 'getOrderHistory']);
+    });
+
     // Auth
     Route::post('auth/register', [UserController::class, 'register']);
     Route::post('auth/login', [UserController::class, 'login']);
@@ -35,13 +48,8 @@ Route::group(['prefix' => 'v1'], function () {
     Route::get('cart/total/{cart_id}', [CartController::class, 'getCartTotalPrice']);
     Route::get('cart/{cart_id}', [CartController::class, 'viewCart']);
 
-    Route::middleware(['jwt.auth'])->group(function () {
-        // Profile
-        Route::patch('profile', [UserController::class, 'updateProfile']);
-        Route::get('profile', [UserController::class, 'getProfile']);
-
-        //pizza
-        Route::post('pizza', [PizzaController::class, 'addPizza']);
-        Route::delete('pizza/{id}',  [PizzaController::class, 'deletePizza']);
-    });
+    // Order
+    Route::post('order', [OrderController::class, 'createOrder']);
+    Route::get('order/{id}', [OrderController::class, 'getOrderSummary']);
+    Route::delete('order/{id}', [OrderController::class, 'cancelOrder']);
 });

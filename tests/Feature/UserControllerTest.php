@@ -16,7 +16,9 @@ class UserControllerTest extends TestCase
         'first_name' => 'Test',
         'last_name' => 'User',
         'email' => 'testuser@gmail.com',
-        'password' => 'testPassword123!'
+        'password' => 'testPassword123!',
+        'address' => 'Lagos, Nigeria',
+        'phone_number' => 1234567890
     ];
 
     public function testAllFieldsAreRequiredForRegistration()
@@ -30,6 +32,8 @@ class UserControllerTest extends TestCase
                     "last_name" => ["The last name field is required."],
                     "email" => ["The email field is required."],
                     "password" => ["The password field is required."],
+                    "address" => ["The address field is required."],
+                    "phone_number" => ["The phone number field is required."],
                 ]
             ]);
     }
@@ -40,7 +44,9 @@ class UserControllerTest extends TestCase
             'first_name' => $this->testUser['first_name'],
             'last_name' => $this->testUser['last_name'],
             'email' => $this->testUser['email'],
-            'password' => $this->testUser['password']
+            'password' => $this->testUser['password'],
+            'address' => $this->testUser['address'],
+            'phone_number' => $this->testUser['phone_number']
         ])
             ->assertStatus(Response::HTTP_CREATED)
             ->assertJsonStructure([
