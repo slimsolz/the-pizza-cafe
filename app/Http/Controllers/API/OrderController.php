@@ -23,6 +23,10 @@ class OrderController extends Controller
         $order = new Order();
         $order->cart_id = $orderRequest->cart_id;
         $order->user_id = $orderRequest->user_id ?? null;
+        $order->first_name = $orderRequest->first_name;
+        $order->last_name = $orderRequest->last_name;
+        $order->email = $orderRequest->email;
+        $order->phone_number = $orderRequest->phone_number;
         $order->currency = $currency;
         $order->zip_code = $orderRequest->zip_code;
         $order->delivery_fee = self::DELIVERY_FEE;
@@ -32,7 +36,7 @@ class OrderController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'order placed successfully',
+            'message' => 'Order #'. $order->id .' placed successfully',
             'data' => $order,
         ], Response::HTTP_CREATED);
     }

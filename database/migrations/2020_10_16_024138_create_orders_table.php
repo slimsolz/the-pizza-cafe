@@ -22,6 +22,10 @@ class CreateOrdersTable extends Migration
             $table->double('sub_total', 8, 2)->default(0.00);
             $table->string('currency');
             $table->integer('zip_code');
+            $table->string('phone_number');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('email');
             $table->timestamps();
         });
     }

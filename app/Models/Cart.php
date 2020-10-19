@@ -47,9 +47,4 @@ class Cart extends Model
     {
         return $this->hasMany(Pizza::class, 'pizza_id', 'id');
     }
-
-    public function order()
-    {
-        return $this->belongsTo(Order::class, 'cart_id');
-    }
 }

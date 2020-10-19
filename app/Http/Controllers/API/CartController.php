@@ -41,7 +41,7 @@ class CartController extends Controller
         if (Cart::where(['cart_id' => $cart_id, 'pizza_id' => $pizza_id])->first()) {
             return response()->json([
                 'success' => false,
-                'message' => 'pizza already added to cart'
+                'message' => 'already added to cart'
             ], Response::HTTP_CONFLICT);
         }
 
@@ -139,6 +139,11 @@ class CartController extends Controller
                 'success' => false,
                 'message' => 'not found'
             ], Response::HTTP_NOT_FOUND);
+        }
+
+        foreach($cart as $ct) {
+            $pizza = Pizza::with('photo')->where('id', $ct->pizza_id)->get();
+            $ct["pizza"] = $pizza;
         }
 
         return response()->json([

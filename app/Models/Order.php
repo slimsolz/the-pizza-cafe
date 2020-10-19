@@ -21,7 +21,11 @@ class Order extends Model
         'delivery_address',
         'sub_total',
         'currency',
-        'zip_code'
+        'zip_code',
+        'first_name',
+        'last_name',
+        'email',
+        'phone_number',
     ];
 
     /**
@@ -34,9 +38,4 @@ class Order extends Model
         'delivery_fee' => 'float',
         'zip_code' => 'integer'
     ];
-
-    public function cart()
-    {
-        return $this->hasOne(Cart::class);
-    }
 }

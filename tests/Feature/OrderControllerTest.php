@@ -27,12 +27,14 @@ class OrderControllerTest extends TestCase
             'cart_id' => $cart_id,
             'delivery_address' => 'lagos',
             'currency' => 'EURO',
-            'zip_code' => 1234
+            'zip_code' => 1234,
+            'first_name' => 'Test',
+            'last_name' => 'User',
+            'email' => 'testuser@gmail.com',
+            'address' => 'Lagos, Nigeria',
+            'phone_number' => 1234567890
         ])
-            ->assertStatus(Response::HTTP_CREATED)
-            ->assertJson([
-                'message' => 'order placed successfully',
-            ]);
+            ->assertStatus(Response::HTTP_CREATED);
 
         $data = Arr::get(json_decode($order->getContent(), true), 'data');
 

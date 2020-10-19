@@ -29,6 +29,10 @@ class OrderRequest extends FormRequest
             'delivery_address' => 'required|string',
             'currency' => 'required|string',
             'zip_code' => 'required|numeric',
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'email' => 'required|email',
+            'phone_number' => 'required|numeric|min:6'
         ];
     }
 }
