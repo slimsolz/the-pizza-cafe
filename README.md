@@ -23,6 +23,11 @@
 - Cancel an order: `POST api/v1/order/{id}`
 - View order history: `POST api/v1/order/history`
 
+## Technologies
+– Laravel
+– MySQL
+- Cloudinary
+
 ## Author
 
 - Odumah Solomon
