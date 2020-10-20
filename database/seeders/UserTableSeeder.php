@@ -18,9 +18,9 @@ class UserTableSeeder extends Seeder
         DB::table('users')->delete();
         User::create([
             'first_name' => 'Admin',
-            'last_name' => 'Admin',
+            'last_name' => 'User',
             'email' => 'admin@gmail.com',
-            'password' => 'testPassword123!',
+            'password' => bcrypt('testPassword123!'),
             'address' => 'Nigeria',
             'phone_number' => 1234567890,
             'isAdmin' => true
